@@ -16,7 +16,7 @@ function CardDemo({title, desc, className} : CardProps ) {
       <div
         className={cn(
           "group w-full cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl mx-auto flex flex-col justify-end p-4 border border-transparent dark:border-neutral-800",
-          "bg-blue-500 bg-cover",
+          "bg-purple-500 bg-cover",
           // Preload hover image by setting it in a pseudo-element
           " before:fixed bg-cover before:inset-0 before:opacity-0 before:z-[-1] before:ease-out ",
           

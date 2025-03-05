@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-blue-600 font-bold text-xl">
+            <Link href="/" className="text-purple-600 font-bold text-xl">
               Negotron
             </Link>
           </div>
@@ -21,7 +21,7 @@ const Navbar = () => {
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-blue-600 hover:text-blue-800 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-purple-600 hover:text-purple-800 focus:outline-none"
             >
               <svg
                 className="h-6 w-6"
@@ -51,19 +51,19 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex md:items-center md:space-x-6">
-            <Link href="/features" className="text-blue-600 hover:text-blue-800">
+            <Link href="/features" className="text-purple-600 hover:text-purple-800">
               Features
             </Link>
-            <Link href="/solutions" className="text-blue-600 hover:text-blue-800">
+            <Link href="/solutions" className="text-purple-600 hover:text-purple-800">
               Solutions
             </Link>
-            <Link href="/docs" className="text-blue-600 hover:text-blue-800">
+            <Link href="/docs" className="text-purple-600 hover:text-purple-800">
               Docs
             </Link>
-            <Link href="/pricing" className="text-blue-600 hover:text-blue-800">
+            <Link href="/pricing" className="text-purple-600 hover:text-purple-800">
               Pricing
             </Link>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800">
+            <button className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-800">
               Start Demo
             </button>
           </div>
@@ -74,19 +74,19 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="/features" className="block text-blue-600 hover:text-blue-800">
+            <Link href="/features" className="block text-purple-600 hover:text-purple-800">
               Features
             </Link>
-            <Link href="/solutions" className="block text-blue-600 hover:text-blue-800">
+            <Link href="/solutions" className="block text-purple-600 hover:text-purple-800">
               Solutions
             </Link>
-            <Link href="/docs" className="block text-blue-600 hover:text-blue-800">
+            <Link href="/docs" className="block text-purple-600 hover:text-purple-800">
               Docs
             </Link>
-            <Link href="/pricing" className="block text-blue-600 hover:text-blue-800">
+            <Link href="/pricing" className="block text-purple-600 hover:text-purple-800">
               Pricing
             </Link>
-            <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800">
+            <button className="w-full bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-800">
               Start Demo
             </button>
           </div>

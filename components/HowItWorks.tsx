@@ -52,7 +52,7 @@ const steps = [
                         step.position === "left"
                           ? "-left-16 md:left-[92%] lg:-right-6 transform translate-x-1/2"
                           : "-left-4 lg:-left-0 transform -translate-x-1/2"
-                      } w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg`}
+                      } w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg`}
                     >
                       {step.id}
                     </div>
