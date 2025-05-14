@@ -3,46 +3,50 @@ import BenefitSegment from '@/components/Benefits';
 import CaseIndustries from '@/components/CaseIndustries';
 import HowItWorks from '@/components/HowItWorks';
 import LogoCarousel from '@/components/LogoCarousel';
+import Navbar from '@/components/Navbar';
 import {Testimonials} from '@/components/Testimonials';
+import WhatItCanDo from '@/components/WhatItCanDo';
 
 import Link from 'next/link';
+import { FaPlayCircle } from 'react-icons/fa';
 
 const Home = () => {
   return (
-    <div className="bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row items-center">
-          {/* Text and Call-to-Action Section */}
-          <div className="md:w-1/2 text-center md:text-left fade-in ">
-            <h1 className="text-6xl font-semibold text-black sm:text-5xl lg:text-6xl pt-16 md:pt-0  ">
-            AI-Powered  <span className='text-purple-600 animate-pulse'>Negotiation</span> Chat System 
+    <div className='pattern'>
+      {/* <Navbar /> */}
+      
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:h-screen">
+        <div className="flex flex-col items-center">
+          <div className=" text-center fade-in lg:max-w-5xl pt-20  ">
+            <h1 className="text-4xl font-semibold text-white sm:text-5xl lg:text-5xl pt-16 md:pt-0  ">
+            Turn Conversations into <span className='bg-gradient-to-r from-primary-200 to-primary-100 bg-clip-text text-transparent '>Conversions</span>, Automatically
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
-            Get the best deals, 24/7, without human effort. 
+            <p className="mt-4 text-lg text-gray-300 lg:px-8">
+            Negotron is a dynamic, human-like negotiation chatbot that mimics real sales personas, adapts to buyer behavior, and drives conversions 24/7 — across any platform. 
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-row gap-6 justify-center items-center pb-6">
               <Link
                 href="/demo"
-                className="inline-block bg-purple-600 text-white px-6 py-3 rounded-xl text-lg font-medium hover:bg-purple-800"
+                className="inline-block bg-gradient-to-r from-primary-200 to-primary-100 text-white px-6 py-3 rounded-xl text-lg font-medium hover:bg-purple-800"
               >
-                Start Demo
+                Try Negotron free
+              </Link>
+              <Link
+                href="/demo"
+                className="flex bg-white text-black px-6 py-3 rounded-xl text-lg font-medium hover:bg-purple-800 flex-row flex-wrap gap-2"
+              >
+                Watch Live Demo <FaPlayCircle color='red' size={22} className='pt-1' />
               </Link>
             </div>
-          </div>
-
-          {/* Illustration Section (Hidden on Mobile and Tablet) */}
-          <div className="hidden md:block md:w-1/2 fade-in">
-            <img
-              src="/5174540.jpg" // Replace with your illustration path
-              alt="Illustration"
-              className="w-full h-auto"
-            />
+            <i className=''>&apos;Automate your sales conversations without losing the human touch.&apos;</i>
           </div>
         </div>
       </div>
-      <LogoCarousel />
+      {/* <LogoCarousel /> */}
       <BenefitSegment />
-      <HowItWorks />
+      <WhatItCanDo />
+      <HowItWorks />  
       <CaseIndustries />
       <AiTech />
       <Testimonials />
