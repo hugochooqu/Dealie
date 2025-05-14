@@ -60,7 +60,7 @@ export default function HowItWorks() {
         <div className="relative flex items-center justify-center z-10">
           <div className="w-[340px] h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
             <Image
-              src="/955.jpg"
+              src="/Ai.jpeg"
               alt="AI Woman"
               width={400}
               height={600}

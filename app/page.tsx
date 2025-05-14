@@ -28,15 +28,15 @@ const Home = () => {
             <div className="mt-8 flex flex-row gap-6 justify-center items-center pb-6">
               <Link
                 href="/demo"
-                className="inline-block bg-gradient-to-r from-primary-200 to-primary-100 text-white px-6 py-3 rounded-xl text-lg font-medium hover:bg-purple-800"
+                className="inline-block bg-gradient-to-r from-primary-200 to-primary-100 text-white px-6 py-3 rounded-xl text-sm md:text-lg font-medium hover:bg-purple-800"
               >
                 Try Negotron free
               </Link>
               <Link
                 href="/demo"
-                className="flex bg-white text-black px-6 py-3 rounded-xl text-lg font-medium hover:bg-purple-800 flex-row flex-wrap gap-2"
+                className="flex bg-white text-black px-6 py-3 rounded-xl  text-sm md:text-lg font-medium  flex-row gap-2"
               >
-                Watch Live Demo <FaPlayCircle color='red' size={22} className='pt-1' />
+                Watch Live Demo <FaPlayCircle color='red' className='pt-1 text-sm' />
               </Link>
             </div>
             <i className=''>&apos;Automate your sales conversations without losing the human touch.&apos;</i>
