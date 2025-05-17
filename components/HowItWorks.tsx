@@ -30,7 +30,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#1a1330] to-[#1a1126] py-20 overflow-hidden px-6">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#1a1330] to-[#1a1126] pattern! py-20 overflow-hidden px-6">
       <h1 className="bg-gradient-to-r from-primary-200 to-primary-100 bg-clip-text text-transparent text-5xl tracking-wide font-bold mb-20">
         How It Works
       </h1>
