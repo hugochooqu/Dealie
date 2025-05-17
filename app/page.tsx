@@ -12,8 +12,8 @@ import { FaPlayCircle } from 'react-icons/fa';
 
 const Home = () => {
   return (
-    <div className='pattern'>
-      {/* <Navbar /> */}
+    <div className='pattern bg-black'>
+      <Navbar />
       
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:h-screen">

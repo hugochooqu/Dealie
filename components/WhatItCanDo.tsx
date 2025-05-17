@@ -57,8 +57,8 @@ const WhatItCanDo = () => {
   ];
 
   return (
-    <div className="relative min-h-auto flex flex-col gap-6 overflow-hidden mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-slate-50">
-      <div className="max-w-7xl lg:px-28 flex flex-col lg:flex-row justify-between gap-10">
+    <div className="relative min-h-auto flex flex-col gap-6 overflow-hidden px-4 sm:px-6 lg:px-8 py-12 bg-slate-50 justify-center items-center">
+      <div className="max-w-7xl lg:px-28 flex flex-col lg:flex-row justify-center items-center gap-10">
         <div className="flex flex-col">
           <h1 className="bg-gradient-to-r from-primary-200 via-primary-100 to-primary-100 bg-clip-text text-transparent text-4xl font-semibold mb-4">
             What Negotron Can Do

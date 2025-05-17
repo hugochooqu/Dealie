@@ -1,46 +1,33 @@
-import { AnimatedTestimonials } from "./ui/animated-testimonials";
+import { Separator } from "./ui/separator";
 
 export function Testimonials() {
-  const testimonials = [
-    {
-      quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-      name: "Sarah Chen",
-      designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-      name: "Michael Rodriguez",
-      designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-      name: "Emily Watson",
-      designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-      name: "James Kim",
-      designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-      name: "Lisa Thompson",
-      designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
   return (
-        <div className='py-20 bg-white'>
-    <AnimatedTestimonials testimonials={testimonials} />
-    </div>
-    );
+    <section className="pattern min-h-[400px] justify-center items-center">
+        <div className="max-w-7xl flex flex-col mx-8 my-6 lg:mx-28 lg:my-12 gap-4">
+          <h1 className="text-4xl font-semibold bg-gradient-to-r from-primary-200 via-primary-100 to-primary-100 text-transparent bg-clip-text">Early access now open</h1>
+          <p className="text-lg text-white">We&apos;re inviting 500 early sellers to join the Beta</p>
+          <p className="text-lg text-white">🎁 Get exclusive access, feedback priority, and a free 30-day trial.</p>
+          <div className="flex flex-row gap-3 pt-4">
+              <input
+                type="email"
+                placeholder="Enter your Email address"
+                className="p-2 border w-full max-w-sm"
+                // value={searchTerm}
+                // onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button className="max-w-sm bg-gradient-to-r from-primary-200 via-primary-100 to to-primary-100 w-auto px-8 ">
+                Join Early Access List
+              </button>
+            </div>
+        </div>
+        <div className="px-12 pt-12">
+        <Separator className="text-2xl bg-gray-400 px-12" />
+        </div>
+        <div className="text-white text-center flex flex-col gap-2 px-8 py-8 text-lg">
+          <h1>Made by Nigerians. For Real Hustlers</h1>
+          <p>Built with love from Crosfect</p>
+          <i className="bg-gradient-to-r from-primary-200  to-primary-100 text-transparent bg-clip-text font-semibold">Backed by the belief that every conversation can become a conversion</i>
+        </div>
+    </section>
+  )
 }

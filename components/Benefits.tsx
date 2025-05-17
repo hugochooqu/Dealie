@@ -29,7 +29,7 @@ const BenefitSegment = () => {
     },
   ];
   return (
-    <div className="relative min-h-auto flex flex-col gap-6 overflow-hidden mx-auto  px-4 sm:px-6 lg:px-8 py-12 bg-slate-50">
+    <div className="relative min-h-auto flex flex-col gap-6 overflow-hidden mx-auto items-center justify-center px-4 sm:px-6 lg:px-8 py-12 bg-slate-50">
       <div className="text-center">
         <h1 className="text-black text-2xl lg:text-5xl font-bold">
           Why AI Negotiations?
@@ -38,7 +38,7 @@ const BenefitSegment = () => {
           Speed, Scale, and Emotional Intelligence — All in One
         </p>
       </div>
-      <div className="m-4 flex flex-col lg:flex-row max-w-7xl lg:mx-32 justify-between  text-white">
+      <div className="m-4 flex flex-col lg:flex-row max-w-7xl justify-center  lg:gap-36  text-white">
         <div className="flex flex-col text-black pt-6">
           <p className=" text-xl sm:text-lg md:text-xl font-semibold ">
             Unbaised Deals.
@@ -61,7 +61,7 @@ const BenefitSegment = () => {
           muted
           width="390"
           height="50"
-          className="border rounded-lg border-primary-200"
+          className="border rounded-lg border-primary-200 mt-10 lg:mt-0"
         >
           <source src="/negotron demo.mp4" />
         </video>
