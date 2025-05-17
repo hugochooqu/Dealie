@@ -36,7 +36,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <div className="flex justify-between h-14 bg-slate-900 rounded-4xl px-12">
+        <div className="flex justify-between h-14 bg-slate-900 rounded-4xl px-3 lg:px-12">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="text-primary-200 font-bold text-xl">
@@ -51,7 +51,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="flex items-center space-x-6">
-            <button className="bg-gradient-to-r from-primary-200 via-primary-200 to-primary-100 bg-clip-text text-transparent font-semibold text-lg px-4 py-2 rounded-md ">
+            <button className="bg-gradient-to-r from-primary-200 via-primary-200 to-primary-100 bg-clip-text text-transparent font-semibold text-base lg:text-lg px-1 md:px-4 py-2 rounded-md ">
               Request a Demo
             </button>
           </div>

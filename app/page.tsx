@@ -4,7 +4,7 @@ import CaseIndustries from '@/components/CaseIndustries';
 import HowItWorks from '@/components/HowItWorks';
 import LogoCarousel from '@/components/LogoCarousel';
 import Navbar from '@/components/Navbar';
-import {Testimonials} from '@/components/Testimonials';
+import {EarlyAccess} from '@/components/EarlyAccess';
 import WhatItCanDo from '@/components/WhatItCanDo';
 
 import Link from 'next/link';
@@ -49,7 +49,7 @@ const Home = () => {
       <HowItWorks />  
       <CaseIndustries />
       <AiTech />
-      <Testimonials />
+      <EarlyAccess />
     </div>
   );
 };

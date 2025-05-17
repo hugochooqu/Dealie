@@ -1,6 +1,6 @@
 import { Separator } from "./ui/separator";
 
-export function Testimonials() {
+export function EarlyAccess() {
   return (
     <section className="pattern min-h-[400px] justify-center items-center">
         <div className="max-w-7xl flex flex-col mx-8 my-6 lg:mx-28 lg:my-12 gap-4">
