@@ -18,7 +18,7 @@ const Home = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:h-screen">
         <div className="flex flex-col items-center">
-          <div className=" text-center fade-in lg:max-w-5xl pt-20  ">
+          <div className=" text-center fade-in lg:max-w-5xl pt-3 lg:pt-20  ">
             <h1 className="text-4xl font-semibold text-white sm:text-5xl lg:text-5xl pt-16 md:pt-0  ">
             Turn Conversations into <span className='bg-gradient-to-r from-primary-200 to-primary-100 bg-clip-text text-transparent '>Conversions</span>, Automatically
             </h1>

@@ -17,17 +17,17 @@ const audience = [
   
   },
   {
-    title: "It thinks like a salesperson:",
+    title: "Mini importers",
   },
   {
-    title: "Mimics real human behavior:",
+    title: "E-commerce brands",
   },
   {
-    title: "Scalable across time zones:",
+    title: "Storefront users (Paystack, Flutterwave, Selar)",
   
   },
   {
-    title: "More deals, less effort:",
+    title: "Even market queens",
   
   },
 ];

@@ -1,4 +1,5 @@
 import { Separator } from "./ui/separator";
+import WaitlistForm from "./WaitListForm";
 
 export function EarlyAccess() {
   return (
@@ -7,18 +8,7 @@ export function EarlyAccess() {
           <h1 className="text-4xl font-semibold bg-gradient-to-r from-primary-200 via-primary-100 to-primary-100 text-transparent bg-clip-text">Early access now open</h1>
           <p className="text-lg text-white">We&apos;re inviting 500 early sellers to join the Beta</p>
           <p className="text-lg text-white">🎁 Get exclusive access, feedback priority, and a free 30-day trial.</p>
-          <div className="flex flex-row gap-3 pt-4">
-              <input
-                type="email"
-                placeholder="Enter your Email address"
-                className="p-2 border w-full max-w-sm"
-                // value={searchTerm}
-                // onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <button className="max-w-sm bg-gradient-to-r from-primary-200 via-primary-100 to to-primary-100 w-auto px-8 ">
-                Join Early Access List
-              </button>
-            </div>
+          <WaitlistForm />
         </div>
         <div className="px-12 pt-12">
         <Separator className="text-2xl bg-gray-400 px-12" />
