@@ -9,6 +9,7 @@ import WhatItCanDo from '@/components/WhatItCanDo';
 
 import Link from 'next/link';
 import { FaPlayCircle } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa6';
 
 const Home = () => {
   return (
@@ -33,10 +34,10 @@ const Home = () => {
                 Try Negotron free
               </Link>
               <Link
-                href="/demo"
+                href="https://negotron.onrender.com" target="_blank"
                 className="flex bg-white text-black px-6 py-3 rounded-xl  text-sm md:text-lg font-medium  flex-row gap-2"
               >
-                Watch Live Demo <FaPlayCircle color='red' className='pt-1 text-sm' />
+                Live Demo <FaArrowRight size={20} className='pt-1 text-sm' />
               </Link>
             </div>
             <i className=''>&apos;Automate your sales conversations without losing the human touch.&apos;</i>

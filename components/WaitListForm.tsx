@@ -49,7 +49,7 @@ export default function WaitlistForm() {
       <button type="submit" disabled={isSubmitting} className="max-w-sm bg-gradient-to-r from-primary-200 via-primary-100 to to-primary-100 w-auto px-8 ">
         { isSubmitting ?"Submitting":"Join Early Access List"}
       </button>
-      {message && <p>{message}</p>}
+      {message && <p className="text-white">{message}</p>}
     </form>
   );
 }

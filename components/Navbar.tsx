@@ -51,9 +51,11 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="flex items-center space-x-6">
+            <Link href="https://negotron.onrender.com" target="_blank">
             <button className="bg-gradient-to-r from-primary-200 via-primary-200 to-primary-100 bg-clip-text text-transparent font-semibold text-base lg:text-lg px-1 md:px-4 py-2 rounded-md ">
               Request a Demo
             </button>
+            </Link>
           </div>
         </div>
       </div>

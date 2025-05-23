@@ -10,8 +10,8 @@ export function EarlyAccess() {
           <p className="text-lg text-white">🎁 Get exclusive access, feedback priority, and a free 30-day trial.</p>
           <WaitlistForm />
         </div>
-        <div className="px-12 pt-12">
-        <Separator className="text-2xl bg-gray-400 px-12" />
+        <div className="px-8 lg:px-12 pt-12">
+        <Separator className="text-2xl bg-gray-400 px-8 lg:px-12" />
         </div>
         <div className="text-white text-center flex flex-col gap-2 px-8 py-8 text-lg">
           <h1>Made by Nigerians. For Real Hustlers</h1>

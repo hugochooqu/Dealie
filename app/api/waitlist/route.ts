@@ -1,33 +1,40 @@
-// app/api/waitlist/route.ts
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import mailchimp from "@mailchimp/mailchimp_marketing";
+import { NextRequest, NextResponse } from 'next/server';
 
-mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY || "",
-  server: process.env.MAILCHIMP_SERVER_PREFIX || "",
-});
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const email = body.email;
-
-  if (!email || typeof email !== "string") {
-    return NextResponse.json({ error: "Email is required" }, { status: 400 });
-  }
-
   try {
-    const response = await mailchimp.lists.addListMember(
-      process.env.MAILCHIMP_AUDIENCE_ID || "",
-      {
-        email_address: email,
-        status: "subscribed",
-      }
-    );
+    const { email } = await req.json();
 
-    return NextResponse.json({ message: "Successfully subscribed", data: response }, { status: 201 });
+    if (!email || typeof email !== 'string') {
+      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    }
+
+    const res = await fetch("https://api.brevo.com/v3/contacts", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "api-key": process.env.BREVO_API_KEY || "",},
+    body: JSON.stringify({
+        email,
+        listIds: [3],
+        updateEnabled: true}),
+    })
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      return NextResponse.json(
+        { isSuccess: false, data, error: data.message || 'Failed to subscribe' },
+        { status: res.status }
+      );
+    }
+
+    return NextResponse.json({ isSuccess: true, data, message: 'Successfully subscribed' }, { status: 201 });
   } catch (error: any) {
-    console.error("Mailchimp error:", error)
-    return NextResponse.json({ error: error.message || "Something went wrong" }, { status: 500 });
+    console.error('Brevo error:', error);
+    return NextResponse.json(
+      { isSuccess: false, data: error, error: error.message || 'Failed to subscribe' },
+      { status: 500 }
+    );
   }
 }
