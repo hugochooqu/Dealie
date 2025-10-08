@@ -18,6 +18,7 @@ import {
   BarChart3,
   Settings,
   Plug,
+  X,
 } from "lucide-react";
 
 interface DashboardLayoutProps {
@@ -73,17 +74,21 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="flex h-screen overflow-hidden bg-gray-50">
       {/* Sidebar */}
       <aside
-        className={cn(
-          "fixed md:static top-0 left-0 h-full w-64 bg-white border-r rounded-3xl shadow-sm z-50 flex flex-col justify-between transform transition-transform duration-300",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        )}
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white rounded-3xl shadow-lg transform transition-transform duration-300 ease-in-out 
+        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
+        lg:translate-x-0 lg:static lg:inset-auto`}
       >
+        <div className="flex items-center justify-between px-4 py-4  ">
+          <h1 className="text-xl font-bold text-indigo-700">DEALIE</h1>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="lg:hidden p-2 rounded-md hover:bg-gray-100"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
         <div>
-          <div className="p-6">
-            <h1 className="text-xl font-bold text-indigo-600">DEALIE</h1>
-          </div>
-
-          <nav className="flex flex-col p-4 space-y-6 font-semibold overflow-y-auto">
+          <nav className="flex flex-col p-4 space-y-6  font-semibold overflow-y-auto">
             <div>
               <p className="text-xs text-gray-500 uppercase mb-2 tracking-wide">
                 Overview
@@ -117,6 +122,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </div>
       </aside>
+
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 z-40 bg-black/30 lg:hidden"
+        ></div>
+      )}
 
       {/* Main content */}
       <div className="flex-1 flex flex-col md:ml-2 h-full overflow-hidden">
