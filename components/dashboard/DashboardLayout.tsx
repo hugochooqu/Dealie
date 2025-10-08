@@ -74,7 +74,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="flex h-screen overflow-hidden bg-gray-50">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white rounded-3xl shadow-lg transform transition-transform duration-300 ease-in-out 
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white rounded-r-3xl shadow-lg transform transition-transform duration-300 ease-in-out 
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
         lg:translate-x-0 lg:static lg:inset-auto`}
       >
