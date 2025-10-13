@@ -47,6 +47,7 @@ const mockConversations = [
 export default function DashboardPage() {
   const [stats] = useState(mockStats);
   const { user } = useAuth();
+  console.log(user)
 
   return (
     <DashboardLayout>
