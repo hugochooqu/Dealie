@@ -29,7 +29,7 @@ ChartJS.register(
 type Props = { dataPoints?: number[]; labels?: string[] };
 
 export default function NegotiationChart({
-  dataPoints = [5, 9, 12, 7, 100, 8, 11],
+  dataPoints = [5, 9, 12, 7, 10, 8, 11],
   labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 }: Props) {
   const data = {

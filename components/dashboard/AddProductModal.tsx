@@ -10,12 +10,12 @@ import { X } from "lucide-react";
 const productSchema = z
   .object({
     name: z.string().min(2, "Product name required"),
-    sku: z.string().min(1, "SKU required"),
-    floorPrice: z.number().min(1, "Enter valid floor price"),
-    ceilingPrice: z.number().min(1, "Enter valid ceiling price"),
-    status: z.string().min(1, "Status required"),
+    // sku: z.string().min(1, "SKU required"),
+    floor_price: z.number().min(1, "Enter valid floor price"),
+    ceiling_price: z.number().min(1, "Enter valid ceiling price"),
+    // status: z.string().min(1, "Status required"),
   })
-  .refine((data) => data.floorPrice < data.ceilingPrice, {
+  .refine((data) => data.floor_price < data.ceiling_price, {
     message: "Floor price must be less than ceiling price",
     path: ["ceilingPrice"],
   });
@@ -60,22 +60,22 @@ const AddProductModal: React.FC<Props> = ({ onClose, onAdd }) => {
             {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
           </div>
 
-          <div>
+          {/* <div>
             <label className="text-sm font-medium">SKU</label>
             <input {...register("sku")} className="w-full border rounded p-2 mt-1" />
             {errors.sku && <p className="text-red-500 text-sm">{errors.sku.message}</p>}
-          </div>
+          </div> */}
 
           <div className="flex gap-3">
             <div className="w-1/2">
               <label className="text-sm font-medium">Floor Price</label>
               <input
                 type="number"
-                {...register("floorPrice", { valueAsNumber: true })}
+                {...register("floor_price", { valueAsNumber: true })}
                 className="w-full border rounded p-2 mt-1"
               />
-              {errors.floorPrice && (
-                <p className="text-red-500 text-sm">{errors.floorPrice.message}</p>
+              {errors.floor_price && (
+                <p className="text-red-500 text-sm">{errors.floor_price.message}</p>
               )}
             </div>
 
@@ -83,16 +83,16 @@ const AddProductModal: React.FC<Props> = ({ onClose, onAdd }) => {
               <label className="text-sm font-medium">Ceiling Price</label>
               <input
                 type="number"
-                {...register("ceilingPrice", { valueAsNumber: true })}
+                {...register("ceiling_price", { valueAsNumber: true })}
                 className="w-full border rounded p-2 mt-1"
               />
-              {errors.ceilingPrice && (
-                <p className="text-red-500 text-sm">{errors.ceilingPrice.message}</p>
+              {errors.ceiling_price && (
+                <p className="text-red-500 text-sm">{errors.ceiling_price.message}</p>
               )}
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <label className="text-sm font-medium">Status</label>
             <select {...register("status")} className="w-full border rounded p-2 mt-1">
               <option value="">Select status</option>
@@ -100,7 +100,7 @@ const AddProductModal: React.FC<Props> = ({ onClose, onAdd }) => {
               <option value="Inactive">Inactive</option>
             </select>
             {errors.status && <p className="text-red-500 text-sm">{errors.status.message}</p>}
-          </div>
+          </div> */}
 
           <Button type="submit" className="w-full mt-3">
             Add Product

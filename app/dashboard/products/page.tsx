@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlusCircle, FileDown, FileUp } from "lucide-react";
@@ -11,29 +11,46 @@ import EditProductModal from "@/components/dashboard/EditProductModal";
 import Papa from "papaparse";
 import { toast } from "sonner";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import { apiRequest } from "@/lib/api";
+import { useAuth } from "@/context/AuthContext";
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Organic Cocoa Powder",
-      sku: "COC-001",
-      floorPrice: 1500,
-      ceilingPrice: 2500,
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Shea Butter",
-      sku: "SHE-002",
-      floorPrice: 1000,
-      ceilingPrice: 1800,
-      status: "Inactive",
-    },
-  ]);
+  const { user } = useAuth();
+  const token = (user as any)?.accessToken || "";
+
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [editProduct, setEditProduct] = useState<any>(null);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const res = await apiRequest("products", "GET", undefined, token);
+      setProducts(res || []);
+    } catch (err) {
+      toast.error("Failed to load products");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const handleAddProduct = async (newProduct: any) => {
+    try {
+      await apiRequest("add_product", "POST", newProduct, token);
+      toast.success("Product added successfully!");
+      fetchProducts(); // refresh list
+    } catch (err) {
+      toast.error("Failed to add product");
+      console.error(err);
+    }
+  };
 
   const handleDelete = (id: number) => {
     setProducts(products.filter((p) => p.id !== id));
@@ -112,20 +129,21 @@ const ProductsPage = () => {
           </CardHeader>
 
           <CardContent>
+          {loading ? (
+              <div className="text-center py-10">Loading products...</div>
+            ) : ( 
             <DataTable
               data={products}
               onEdit={setEditProduct}
               onDelete={handleDelete}
-            />
+          /> )}
           </CardContent>
         </Card>
 
         {showAddModal && (
           <AddProductModal
             onClose={() => setShowAddModal(false)}
-            onAdd={(newProduct) =>
-              setProducts([...products, { id: Date.now(), ...newProduct }])
-            }
+            onAdd={handleAddProduct}
           />
         )}
 

@@ -6,10 +6,12 @@ import { Edit, Trash2, Search } from "lucide-react";
 interface Product {
   id: number;
   name: string;
-  sku: string;
-  floorPrice: number;
-  ceilingPrice: number;
-  status: string;
+  sku?: string;
+  floorPrice?: number;
+  ceilingPrice?: number;
+  floor_price?: number;
+  ceiling_price?: number;
+  status?: string;
 }
 
 interface DataTableProps {
@@ -22,7 +24,7 @@ export const DataTable: React.FC<DataTableProps> = ({ data, onEdit, onDelete }) 
   const [searchTerm, setSearchTerm] = useState("");
 
   const filtered = data.filter((p) =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    p.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -53,39 +55,46 @@ export const DataTable: React.FC<DataTableProps> = ({ data, onEdit, onDelete }) 
             </tr>
           </thead>
           <tbody>
-            {filtered.map((product) => (
-              <tr key={product.id} className="border-b hover:bg-gray-50">
-                <td className="p-3">{product.name}</td>
-                <td className="p-3">{product.sku}</td>
-                <td className="p-3">₦{product.floorPrice.toLocaleString()}</td>
-                <td className="p-3">₦{product.ceilingPrice.toLocaleString()}</td>
-                <td className="p-3">
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs ${
-                      product.status === "Active"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {product.status}
-                  </span>
-                </td>
-                <td className="p-3 text-center flex justify-center gap-3">
-                  <button
-                    onClick={() => onEdit(product)}
-                    className="text-blue-600 hover:text-blue-800"
-                  >
-                    <Edit size={18} />
-                  </button>
-                  <button
-                    onClick={() => onDelete(product.id)}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {filtered.map((product) => {
+              const floor =
+                product.floorPrice ?? product.floor_price ?? 0;
+              const ceiling =
+                product.ceilingPrice ?? product.ceiling_price ?? 0;
+
+              return (
+                <tr key={product.id} className="border-b hover:bg-gray-50">
+                  <td className="p-3">{product.name || "—"}</td>
+                  <td className="p-3">{product.sku || "—"}</td>
+                  <td className="p-3">₦{floor.toLocaleString()}</td>
+                  <td className="p-3">₦{ceiling.toLocaleString()}</td>
+                  <td className="p-3">
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        product.status === "Active"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {product.status || "Inactive"}
+                    </span>
+                  </td>
+                  <td className="p-3 text-center flex justify-center gap-3">
+                    <button
+                      onClick={() => onEdit(product)}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      <Edit size={18} />
+                    </button>
+                    <button
+                      onClick={() => onDelete(product.id)}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={6} className="text-center p-4 text-gray-500">
