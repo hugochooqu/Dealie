@@ -20,7 +20,11 @@ interface DataTableProps {
   onDelete: (id: number) => void;
 }
 
-export const DataTable: React.FC<DataTableProps> = ({ data, onEdit, onDelete }) => {
+export const DataTable: React.FC<DataTableProps> = ({
+  data,
+  onEdit,
+  onDelete,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filtered = data.filter((p) =>
@@ -56,8 +60,7 @@ export const DataTable: React.FC<DataTableProps> = ({ data, onEdit, onDelete }) 
           </thead>
           <tbody>
             {filtered.map((product) => {
-              const floor =
-                product.floorPrice ?? product.floor_price ?? 0;
+              const floor = product.floorPrice ?? product.floor_price ?? 0;
               const ceiling =
                 product.ceilingPrice ?? product.ceiling_price ?? 0;
 

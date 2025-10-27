@@ -23,6 +23,8 @@ const ProductsPage = () => {
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [editProduct, setEditProduct] = useState<any>(null);
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const fetchProducts = async () => {
     try {
@@ -52,8 +54,39 @@ const ProductsPage = () => {
     }
   };
 
-  const handleDelete = (id: number) => {
-    setProducts(products.filter((p) => p.id !== id));
+  const handleEditProduct = async (updated: any) => {
+    try {
+      await apiRequest(`products/${updated.id}`, "PUT", updated, token);
+      toast.success("Product updated successfully!");
+      fetchProducts();
+    } catch (err) {
+      console.error("Update failed:", err);
+      toast.error("Failed to update product");
+    }
+  };
+
+  const handleDeleteClick = (id: number) => {
+    setDeleteId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deleteId) return;
+    try {
+      await apiRequest(
+        `products/${deleteId}`,
+        "DELETE",
+        undefined,
+        token
+      );
+      toast.success("Product deleted successfully!");
+      fetchProducts();
+    } catch (err) {
+      toast.error("Failed to delete product");
+    } finally {
+      setShowDeleteModal(false);
+      setDeleteId(null);
+    }
   };
 
   const handleExport = () => {
@@ -129,14 +162,15 @@ const ProductsPage = () => {
           </CardHeader>
 
           <CardContent>
-          {loading ? (
+            {loading ? (
               <div className="text-center py-10">Loading products...</div>
-            ) : ( 
-            <DataTable
-              data={products}
-              onEdit={setEditProduct}
-              onDelete={handleDelete}
-          /> )}
+            ) : (
+              <DataTable
+                data={products}
+                onEdit={setEditProduct}
+                onDelete={handleDeleteClick}
+              />
+            )}
           </CardContent>
         </Card>
 
@@ -151,12 +185,31 @@ const ProductsPage = () => {
           <EditProductModal
             product={editProduct}
             onClose={() => setEditProduct(null)}
-            onSave={(updated) =>
-              setProducts(
-                products.map((p) => (p.id === updated.id ? updated : p))
-              )
-            }
+            onSave={handleEditProduct}
           />
+        )}
+
+        {showDeleteModal && (
+          <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-xl w-full max-w-sm text-center">
+              <h3 className="text-lg font-semibold mb-3">Delete Product</h3>
+              <p className="text-gray-600 mb-4">
+                Are you sure you want to delete this product? This action cannot
+                be undone.
+              </p>
+              <div className="flex justify-center gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  Cancel
+                </Button>
+                <Button variant="destructive" onClick={handleConfirmDelete}>
+                  Delete
+                </Button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </DashboardLayout>
