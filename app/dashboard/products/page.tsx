@@ -13,12 +13,14 @@ import { toast } from "sonner";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { apiRequest } from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
+import { useAppStore } from "@/store/useAppStore";
 
 const ProductsPage = () => {
   const { user } = useAuth();
-  const token = (user as any)?.accessToken || "";
+const userToken = (user as any)?.accessToken || "";
 
-  const [products, setProducts] = useState<any[]>([]);
+
+const { products, setProducts, token, setToken } = useAppStore();
   const [loading, setLoading] = useState(true);
 
   const [showAddModal, setShowAddModal] = useState(false);
@@ -26,10 +28,14 @@ const ProductsPage = () => {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+  useEffect(() => {
+  if (userToken) setToken(userToken);
+}, [userToken, setToken]);
+
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await apiRequest("products", "GET", undefined, token);
+      const res = await apiRequest("products", "GET", undefined, userToken);
       setProducts(res || []);
     } catch (err) {
       toast.error("Failed to load products");
@@ -45,7 +51,7 @@ const ProductsPage = () => {
 
   const handleAddProduct = async (newProduct: any) => {
     try {
-      await apiRequest("add_product", "POST", newProduct, token);
+      await apiRequest("add_product", "POST", newProduct, userToken);
       toast.success("Product added successfully!");
       fetchProducts(); // refresh list
     } catch (err) {
@@ -56,7 +62,7 @@ const ProductsPage = () => {
 
   const handleEditProduct = async (updated: any) => {
     try {
-      await apiRequest(`products/${updated.id}`, "PUT", updated, token);
+      await apiRequest(`products/${updated.id}`, "PUT", updated, userToken);
       toast.success("Product updated successfully!");
       fetchProducts();
     } catch (err) {
@@ -77,7 +83,7 @@ const ProductsPage = () => {
         `products/${deleteId}`,
         "DELETE",
         undefined,
-        token
+        userToken
       );
       toast.success("Product deleted successfully!");
       fetchProducts();
