@@ -52,23 +52,31 @@ export default function PersonaSetup() {
   const token = (user as any)?.accessToken || "";
 
   // Fetch personas + active persona on mount
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const allPersonas = await apiRequest("personas", "GET", undefined, token);
-        setPersonas(allPersonas || []);
+  const fetchPersonas = async () => {
+    setLoading(true);
+    try {
+      const allPersonas = await apiRequest("personas", "GET", undefined, token);
+      setPersonas(allPersonas || []);
 
-        const activePersona = await apiRequest("personas/active", "GET", undefined, token);
-        if (activePersona) setSelectedPersona(activePersona);
-      } catch (err) {
-        console.error(err);
-        toast.error("Failed to load personas");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [token, setPersonas, setSelectedPersona]);
+      const activePersona = await apiRequest(
+        "personas/active",
+        "GET",
+        undefined,
+        token
+      );
+      if (activePersona) setSelectedPersona(activePersona);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to load personas");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPersonas();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   // Create custom persona
   const handleSaveCustomPersona = async () => {
@@ -76,7 +84,12 @@ export default function PersonaSetup() {
 
     setActionLoading(true);
     try {
-      const newPersona = await apiRequest("personas/custom", "POST", customPersona, token);
+      const newPersona = await apiRequest(
+        "personas/custom",
+        "POST",
+        customPersona,
+        token
+      );
       setPersonas([...personas, newPersona]);
       toast.success("Persona created successfully");
       setOpenModal(false);
@@ -92,7 +105,12 @@ export default function PersonaSetup() {
   // Select persona (set active)
   const handleSelectPersona = async (persona: any) => {
     try {
-      await apiRequest(`personas/select/${persona.id}`, "POST", undefined, token);
+      await apiRequest(
+        `personas/select/${persona.id}`,
+        "POST",
+        undefined,
+        token
+      );
       setSelectedPersona(persona);
       toast.success(`Persona "${persona.name}" is now active`);
     } catch (err) {
@@ -111,7 +129,9 @@ export default function PersonaSetup() {
   const handleDeletePersona = async () => {
     if (deleteId == null) return;
 
-    const personaToDelete = personas.find((p) => p.id.toString() === deleteId.toString());
+    const personaToDelete = personas.find(
+      (p) => p.id.toString() === deleteId.toString()
+    );
     if (!personaToDelete) {
       toast.error("Persona not found");
       return;
@@ -134,7 +154,9 @@ export default function PersonaSetup() {
     setActionLoading(true);
     try {
       await apiRequest(`personas/${deleteId}`, "DELETE", undefined, token);
-      setPersonas(personas.filter((p) => p.id.toString() !== deleteId.toString()));
+      setPersonas(
+        personas.filter((p) => p.id.toString() !== deleteId.toString())
+      );
       toast.success("Persona deleted successfully");
     } catch (err) {
       console.error(err);
@@ -152,47 +174,41 @@ export default function PersonaSetup() {
   };
 
   // Save edits
-const handleUpdatePersona = async () => {
-  if (!editPersona?.id) return;
-  setActionLoading(true);
+  const handleUpdatePersona = async () => {
+    if (!editPersona?.id) return;
+    setActionLoading(true);
 
-  try {
-    const updated = await apiRequest(
-      `personas/${editPersona.id}`,
-      "PUT",
-      {
-        name: editPersona.name,
-        description: editPersona.description,
-        tone: editPersona.tone,
-        strategy: editPersona.strategy,
-      },
-      token
-    );
+    try {
+      await apiRequest(
+        `personas/${editPersona.id}`,
+        "PUT",
+        {
+          name: editPersona.name,
+          description: editPersona.description,
+          tone: editPersona.tone,
+          strategy: editPersona.strategy,
+        },
+        token
+      );
 
-    // Ensure consistent shape and id type
-    const normalized = {
-      ...updated,
-      id: Number(updated.id || editPersona.id),
-    };
+      toast.success("Persona updated successfully");
+      setEditModal(false);
 
-    setPersonas(personas.map((p: any) =>
-      Number(p.id) === Number(editPersona.id) ? normalized : p
-    ));
+      // ✅ Refetch the list from server for accurate data
+      await fetchPersonas();
 
-    if (selectedPersona?.id === editPersona.id) {
-      setSelectedPersona(normalized);
+      // ✅ If that persona was the active one, re-select it
+      const updatedActive = personas.find(
+        (p) => String(p.id) === String(editPersona.id)
+      );
+      if (updatedActive) setSelectedPersona(updatedActive);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update persona");
+    } finally {
+      setActionLoading(false);
     }
-
-    toast.success("Persona updated successfully");
-    setEditModal(false);
-  } catch (err) {
-    console.error(err);
-    toast.error("Failed to update persona");
-  } finally {
-    setActionLoading(false);
-  }
-};
-
+  };
 
   const channels = [
     { id: "global", name: "Global Default" },
@@ -291,7 +307,9 @@ const handleUpdatePersona = async () => {
                     )}
 
                     <h3 className="font-semibold text-lg">{persona.name}</h3>
-                    <p className="text-gray-600 text-sm mt-1">{persona.description}</p>
+                    <p className="text-gray-600 text-sm mt-1">
+                      {persona.description}
+                    </p>
 
                     {!persona.vendor_id && (
                       <span className="absolute bottom-2 right-3 text-[11px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
@@ -376,8 +394,13 @@ const handleUpdatePersona = async () => {
               />
             </div>
             <DialogFooter>
-              <Button disabled={actionLoading} onClick={handleSaveCustomPersona}>
-                {actionLoading && <Loader2 className="animate-spin mr-2 h-4 w-4" />}
+              <Button
+                disabled={actionLoading}
+                onClick={handleSaveCustomPersona}
+              >
+                {actionLoading && (
+                  <Loader2 className="animate-spin mr-2 h-4 w-4" />
+                )}
                 Save Persona
               </Button>
             </DialogFooter>
@@ -427,7 +450,9 @@ const handleUpdatePersona = async () => {
             )}
             <DialogFooter>
               <Button disabled={actionLoading} onClick={handleUpdatePersona}>
-                {actionLoading && <Loader2 className="animate-spin mr-2 h-4 w-4" />}
+                {actionLoading && (
+                  <Loader2 className="animate-spin mr-2 h-4 w-4" />
+                )}
                 Save Changes
               </Button>
             </DialogFooter>
@@ -441,7 +466,8 @@ const handleUpdatePersona = async () => {
               <DialogTitle>Confirm Delete</DialogTitle>
             </DialogHeader>
             <p className="text-gray-600 mb-4">
-              Are you sure you want to delete this persona? This action cannot be undone.
+              Are you sure you want to delete this persona? This action cannot
+              be undone.
             </p>
             <DialogFooter>
               <Button variant="outline" onClick={() => setDeleteModal(false)}>
@@ -452,7 +478,9 @@ const handleUpdatePersona = async () => {
                 disabled={actionLoading}
                 onClick={handleDeletePersona}
               >
-                {actionLoading && <Loader2 className="animate-spin mr-2 h-4 w-4" />}
+                {actionLoading && (
+                  <Loader2 className="animate-spin mr-2 h-4 w-4" />
+                )}
                 Delete
               </Button>
             </DialogFooter>
