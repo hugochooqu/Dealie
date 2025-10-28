@@ -19,6 +19,7 @@ import NegotiationChart from "@/components/NegotiationChart";
 import SalesProfitChart from "@/components/SalesProfitChart";
 import { apiRequest } from "@/lib/api";
 import { toast } from "sonner";
+import { useDashboardStore } from "@/store/useDashboardStore";
 
 const mockStats = {
   totalProducts: 24,
@@ -48,13 +49,18 @@ const mockConversations = [
   },
 ];
 
-export default function DashboardPage() {
-  const [loading, setLoading] = useState(true);
+ export default function DashboardPage() {
+  const [load, setLoad] = useState(true);
   const [whatsappLink, setWhatsappLink] = useState<string | null>(null);
-  const [stats] = useState(mockStats);
+  const { stats, fetchDashboardStats, loading } = useDashboardStore();
+
   const { user } = useAuth();
   const token = (user as any)?.accessToken || "";
   console.log(user);
+
+  useEffect(() => {
+    if (token) fetchDashboardStats(token);
+  }, [token]);
 
   useEffect(() => {
     const fetchWhatsAppLink = async () => {
@@ -70,7 +76,7 @@ export default function DashboardPage() {
         console.error(err);
         toast.error("Failed to load WhatsApp link");
       } finally {
-        setLoading(false);
+        setLoad(false);
       }
     };
     fetchWhatsAppLink();
@@ -137,7 +143,7 @@ export default function DashboardPage() {
             <CardTitle>Your WhatsApp Link</CardTitle>
           </CardHeader>
           <CardContent>
-            {loading ? (
+            {load ? (
               <div className="flex justify-center py-6">
                 <Loader2 className="animate-spin text-indigo-500" />
               </div>
@@ -179,28 +185,32 @@ export default function DashboardPage() {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
-        <StatCard
-          title="Total Products"
-          value={stats.totalProducts}
-          icon={<Package className="text-blue-500" />}
-        />
-        <StatCard
-          title="Active Channels"
-          value={stats.activeChannels}
-          icon={<Zap className="text-green-500" />}
-        />
-        <StatCard
-          title="Total Negotiations"
-          value={stats.totalNegotiations}
-          icon={<MessageSquare className="text-orange-500" />}
-        />
-        <StatCard
-          title="Conversion Rate"
-          value={stats.conversionRate}
-          icon={<Percent className="text-purple-500" />}
-        />
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
+          <StatCard
+            title="Total Products"
+            value={stats.totalProducts}
+            icon={<Package className="text-blue-500" />}
+          />
+          <StatCard
+            title="Active Channels"
+            value={stats.activeChannels}
+            icon={<Zap className="text-green-500" />}
+          />
+          <StatCard
+            title="Total Negotiations"
+            value={stats.totalNegotiations}
+            icon={<MessageSquare className="text-orange-500" />}
+          />
+          <StatCard
+            title="Conversion Rate"
+            value={stats.conversionRate}
+            icon={<Percent className="text-purple-500" />}
+          />
+        </div>
+      )}
 
       {/* Negotiation Chart */}
       <Card className="shadow-md w-full mb-8">
