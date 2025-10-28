@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,11 +10,15 @@ import {
   Zap,
   Percent,
   CalendarDays,
+  Copy,
+  Loader2,
 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import NegotiationChart from "@/components/NegotiationChart";
 import SalesProfitChart from "@/components/SalesProfitChart";
+import { apiRequest } from "@/lib/api";
+import { toast } from "sonner";
 
 const mockStats = {
   totalProducts: 24,
@@ -45,9 +49,39 @@ const mockConversations = [
 ];
 
 export default function DashboardPage() {
+  const [loading, setLoading] = useState(true);
+  const [whatsappLink, setWhatsappLink] = useState<string | null>(null);
   const [stats] = useState(mockStats);
   const { user } = useAuth();
-  console.log(user)
+  const token = (user as any)?.accessToken || "";
+  console.log(user);
+
+  useEffect(() => {
+    const fetchWhatsAppLink = async () => {
+      try {
+        const data = await apiRequest(
+          "vendor/whatsapp-link",
+          "GET",
+          undefined,
+          token
+        );
+        setWhatsappLink(data.whatsapp_link);
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to load WhatsApp link");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchWhatsAppLink();
+  }, [token]);
+
+  const handleCopy = () => {
+    if (whatsappLink) {
+      navigator.clipboard.writeText(whatsappLink);
+      toast.success("WhatsApp link copied to clipboard!");
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -99,31 +133,41 @@ export default function DashboardPage() {
 
         {/* Quick Access */}
         <div className="w-full md:w-[30%] rounded-2xl bg-white text-gray-800 p-6 md:p-10 flex flex-col justify-between shadow-lg">
-          <div className="flex flex-col gap-4">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Quick Access
-            </h2>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span>Help</span>
-                <Button variant="outline" size="sm">
-                  View
-                </Button>
+          <CardHeader>
+            <CardTitle>Your WhatsApp Link</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {loading ? (
+              <div className="flex justify-center py-6">
+                <Loader2 className="animate-spin text-indigo-500" />
               </div>
-              <div className="flex justify-between items-center">
-                <span>Alerts</span>
-                <Button variant="outline" size="sm">
-                  View
-                </Button>
+            ) : whatsappLink ? (
+              <div className="flex flex-col items-center justify-between border p-3 rounded-lg bg-gray-50 w-full max-w-sm md:max-w-md">
+                <h1 className="text-sm text-center mb-2">
+                  Share this link with your customers to start up a conversation
+                  on WhatsApp
+                </h1>
+
+                <div className="flex items-center gap-2 w-full overflow-hidden">
+                  <span className="truncate text-indigo-600 font-medium flex-1">
+                    {whatsappLink}
+                  </span>
+                  <Button
+                    variant="outline"
+                    onClick={handleCopy}
+                    className="shrink-0"
+                  >
+                    <Copy size={16} className="mr-1" /> Copy
+                  </Button>
+                </div>
               </div>
-              <div className="flex justify-between items-center">
-                <span>Inbox</span>
-                <Button variant="outline" size="sm">
-                  Open
-                </Button>
-              </div>
-            </div>
-          </div>
+            ) : (
+              <p className="text-gray-600 italic">
+                No link yet. Create your first product to unlock your WhatsApp
+                link.
+              </p>
+            )}
+          </CardContent>
         </div>
       </div>
 
