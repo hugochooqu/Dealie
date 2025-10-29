@@ -38,7 +38,7 @@ const AiTech = () => {
       <div className="flex flex-col lg:flex-row lg:gap-68 ">
         <div className="text-black lg:w-[50%] ">
           <div className="py-20 px-8">
-            <h1 className="bg-gradient-to-r from-primary-200 via-primary-100 to-primary-200 text-transparent bg-clip-text text-3xl lg:text-4xl font-bold">Negotron is Ideal for</h1>
+            <h1 className="bg-gradient-to-r from-primary-200 via-primary-100 to-primary-200 text-transparent bg-clip-text text-3xl lg:text-4xl font-bold">Dealie is Ideal for</h1>
             <div className="pt-8 flex flex-col gap-6">
               {audience.map((audience, idx) => (
                 <div key={idx} className="flex flex-row gap-3"> 

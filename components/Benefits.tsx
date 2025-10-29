@@ -5,7 +5,7 @@ const BenefitSegment = () => {
     {
       title: "Buyers want answers now:",
       description:
-        "Negotron replies instantly, intelligently, and persuasively.",
+        "Dealie replies instantly, intelligently, and persuasively.",
     },
     {
       title: "It thinks like a salesperson:",
@@ -15,7 +15,7 @@ const BenefitSegment = () => {
     {
       title: "Mimics real human behavior:",
       description:
-        "Friendly, witty, professional, or assertive — Negotron matches your brand tone or sales style.",
+        "Friendly, witty, professional, or assertive — Dealie matches your brand tone or sales style.",
     },
     {
       title: "Scalable across time zones:",
@@ -63,7 +63,7 @@ const BenefitSegment = () => {
           height="50"
           className="border rounded-lg border-primary-200 mt-10 lg:mt-0"
         >
-          <source src="/negotron demo.mp4" />
+          <source src="/Dealie demo.mp4" />
         </video>
       </div>
     </div>

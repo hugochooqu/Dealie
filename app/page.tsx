@@ -10,6 +10,7 @@ import WhatItCanDo from '@/components/WhatItCanDo';
 import Link from 'next/link';
 import { FaPlayCircle } from 'react-icons/fa';
 import { FaArrowRight } from 'react-icons/fa6';
+import Loyalty from '@/components/Loyalty';
 
 const Home = () => {
   return (
@@ -24,20 +25,20 @@ const Home = () => {
             Turn Conversations into <span className='bg-gradient-to-r from-primary-200 to-primary-100 bg-clip-text text-transparent '>Conversions</span>, Automatically
             </h1>
             <p className="mt-4 text-lg text-gray-300 lg:px-8">
-            Negotron is a dynamic, human-like negotiation chatbot that mimics real sales personas, adapts to buyer behavior, and drives conversions 24/7 — across any platform. 
+            Dealie is a dynamic, human-like negotiation chatbot that mimics real sales personas, adapts to buyer behavior, and drives conversions 24/7 — across any platform. 
             </p>
             <div className="mt-8 flex flex-row gap-6 justify-center items-center pb-6">
               <Link
                 href="/demo"
                 className="inline-block bg-gradient-to-r from-primary-200 to-primary-100 text-white px-6 py-3 rounded-xl text-sm md:text-lg font-medium hover:bg-purple-800"
               >
-                Try Negotron free
+                Try Dealie free
               </Link>
               <Link
-                href="https://negotron.onrender.com" target="_blank"
+                href="/sign-in" target="_blank"
                 className="flex bg-white text-black px-6 py-3 rounded-xl  text-sm md:text-lg font-medium  flex-row gap-2"
               >
-                Live Demo <FaArrowRight size={20} className='pt-1 text-sm' />
+                Sign In <FaArrowRight size={20} className='pt-1 text-sm' />
               </Link>
             </div>
             <i className=''>&apos;Automate your sales conversations without losing the human touch.&apos;</i>
@@ -50,6 +51,7 @@ const Home = () => {
       <HowItWorks />  
       <CaseIndustries />
       <AiTech />
+      <Loyalty />
       <EarlyAccess />
     </div>
   );

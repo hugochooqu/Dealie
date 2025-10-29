@@ -143,9 +143,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             >
               <Menu />
             </Button>
-            <h2 className="text-xl font-semibold text-gray-800">
-              Vendor Dashboard
-            </h2>
+            
           </div>
           <div className="flex items-center gap-3">
             <span className="text-sm text-gray-700">{user?.email}</span>

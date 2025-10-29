@@ -9,7 +9,7 @@ const steps = [
     number: '01',
   },
   {
-    title: 'Negotron engages instantly',
+    title: 'Dealie engages instantly',
     description:
       'Greets the buyer, understands their intent, and initiates dynamic price negotiation based on your pre-set pricing logic and brand tone.',
     number: '02',
@@ -23,7 +23,7 @@ const steps = [
   {
     title: 'Deal is closed',
     description:
-      'Once the buyer agrees, Negotron confirms the sale, collects buyer info, and notifies you. Every interaction is tracked. You can review the chat logs, monitor performance, and fine-tune behavior',
+      'Once the buyer agrees, Dealie confirms the sale, collects buyer info, and notifies you. Every interaction is tracked. You can review the chat logs, monitor performance, and fine-tune behavior',
     number: '04',
   },
 ];

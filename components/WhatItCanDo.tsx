@@ -27,7 +27,7 @@ const WhatItCanDo = () => {
       emoji: "🧠",
       title: "Learn Buyer Patterns",
       description:
-        "Negotron tracks negotiation history and adapts to buyer behavior over time.",
+        "Dealie tracks negotiation history and adapts to buyer behavior over time.",
       image: "/2223.jpg",
     },
     {
@@ -51,7 +51,7 @@ const WhatItCanDo = () => {
       emoji: "🛡️",
       title: "Human When Needed",
       description:
-        "Let buyers switch to real you with one tap — or let Negotron handle it all.",
+        "Let buyers switch to real you with one tap — or let Dealie handle it all.",
       image: "/955.jpg",
     },
   ];
@@ -61,7 +61,7 @@ const WhatItCanDo = () => {
       <div className="max-w-7xl lg:px-28 flex flex-col lg:flex-row justify-center items-center gap-10">
         <div className="flex flex-col">
           <h1 className="bg-gradient-to-r from-primary-200 via-primary-100 to-primary-100 bg-clip-text text-transparent text-4xl font-semibold mb-4">
-            What Negotron Can Do
+            What Dealie Can Do
           </h1>
           <div className="flex flex-col gap-4">
             {features.map((feature, idx) => (

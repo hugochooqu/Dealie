@@ -1,13 +1,17 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaArrowRight } from "react-icons/fa6";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,8 +45,8 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="text-primary-200 font-bold text-xl">
               <Image
-                src="/NEGOAI.png"
-                alt="negotron logo"
+                src="/dealie-icon.png"
+                alt="dealie logo"
                 width={60}
                 height={40}
               />
@@ -51,11 +55,22 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="flex items-center space-x-6">
-            <Link href="https://negotron.onrender.com" target="_blank">
-            <button className="bg-gradient-to-r from-primary-200 via-primary-200 to-primary-100 bg-clip-text text-transparent font-semibold text-base lg:text-lg px-1 md:px-4 py-2 rounded-md ">
-              Request a Demo
-            </button>
-            </Link>
+            {user ? (
+              <Link
+                href="/dashboard"
+                className="flex text-white px-6 py-3 rounded-xl text-sm md:text-lg font-medium flex-row gap-2"
+              >
+                Go to Dashboard{" "}
+                <FaArrowRight size={20} className="pt-1 text-sm animate-pulse" />
+              </Link>
+            ) : (
+              <Link
+                href="/sign-in"
+                className="flex text-white px-6 py-3 rounded-xl text-sm md:text-lg font-medium flex-row gap-2"
+              >
+                Sign In <FaArrowRight size={20} className="pt-1 text-sm animate-pulse" />
+              </Link>
+            )}
           </div>
         </div>
       </div>
